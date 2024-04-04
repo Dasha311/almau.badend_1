@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <title>Todos</title>
+    </head>
+    <body>
+        <form action="/todos/" method="POST">
+            {% csrf_token %}
+
+            {% for field in form %}
+                 <div class="field-wrapper">
+                        {{ field.label_tag }} {{ field }}
+                        {% if field.errors|length > 0 %}
+                            <div class="text-danger">
+                                 {{ field.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+            {% endfor %}
+
+            <div>
+                <button type="submit">Create Todos</button>
+            </div>
+        </form>
+        <h1>My todos</h1>
+        {% if error|length %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+        {% if todos|length > 0 %}
+            <ol>
+            {% for todo in todos %}
+                <li>{{ todo.title }} -- {{ todo.status }} <a href="/todos/{{todo.id}}/delete">
+                    <button>Delete</button>
+                </a>
+                </li>
+            {% endfor %}
+            </ol>
+        {% else %}
+            <p>Todos Not Found</p>
+    {% endif %}
+    </body>
+
+
+</html>

@@ -1,0 +1,155 @@
+body {
+    background-color: #f8f8f8; /* более светлый оттенок серого */
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 700px;
+    height: 600px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.backbox {
+    background-color: #253b54; /* глубокий синий */
+    width: 100%;
+    height: 80%;
+    position: absolute;
+    transform: translate(0, -50%);
+    top: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.frontbox {
+    background-color: #ffffff;
+    border-radius: 20px;
+    height: 100%;
+    width: 50%;
+    z-index: 10;
+    position: absolute;
+    right: 0;
+    margin-right: 3%;
+    margin-left: 3%;
+    transition: right 0.8s ease-in-out;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.moving {
+    right: 45%;
+}
+
+.loginMsg, .signupMsg {
+    width: 50%;
+    height: 100%;
+    font-size: 16px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease-in-out;
+}
+
+.loginMsg .title, .signupMsg .title {
+    font-weight: bold;
+    font-size: 24px;
+    color: #ffffff; /* белый цвет текста */
+    margin-bottom: 20px;
+}
+
+.loginMsg p, .signupMsg p {
+    font-weight: normal;
+    color: #ffffff; /* белый цвет текста */
+}
+
+.textcontent {
+    color: #ffffff; /* белый цвет текста */
+    margin-top: 20px;
+}
+
+.loginMsg button, .signupMsg button {
+    background-color: #38b44a; /* темно-зеленый */
+    border: 2px solid #38b44a; /* темно-зеленый */
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 24px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.loginMsg button:hover, .signupMsg button:hover {
+    background-color: #2a9c3d; /* темно-зеленый с более темным оттенком при наведении */
+}
+
+/* front box content */
+.login, .signup {
+    padding: 30px;
+    text-align: center;
+}
+
+.login h2, .signup h2 {
+    color: #333333; /* темно-серый цвет */
+    font-size: 26px;
+    margin-bottom: 30px;
+}
+
+.inputbox {
+    margin-top: 20px;
+}
+
+.login input, .signup input {
+    display: block;
+    width: calc(100% - 40px);
+    height: 50px;
+    background-color: #f2f2f2;
+    border: none;
+    margin-bottom: 20px;
+    font-size: 16px;
+    padding: 0 20px;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.login button, .signup button {
+    background-color: #007bff; /* голубой */
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login button:hover, .signup button:hover {
+    background-color: #0056b3; /* голубой с более темным оттенком при наведении */
+}
+
+/* Fade In & Out */
+.login p {
+    cursor: pointer;
+    color: #333333; /* темно-серый цвет */
+    font-size: 16px;
+}
+
+.visibility {
+    opacity: 0;
+}
+
+.hide {
+    display: none;
+}

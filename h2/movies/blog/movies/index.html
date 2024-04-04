@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <title>Moves</title>
+    </head>
+    <body>
+        <h1>My movies</h1>
+        <ol>
+        {% for movie in movies %}
+            <li>{{ movie.name }}</li>
+        { % endfor %}
+        </ol>
+    </body>
+</html>

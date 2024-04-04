@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Todos</title>
+{% endblock %}
+
+
+{% block content %}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    {% include 'header.html' %}
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="row">
+                    <div class="col-12">
+                        {% for msg in messages %}
+                            <p class="error-message">{{ msg }}</p>
+                        {% endfor %}
+                            </div>
+                </div>
+
+
+        </div>
+                <div class="col-8 offset-2">
+                    <form action="{% url 'todo' %}" method="POST" class="my-5">
+                        {% csrf_token %}
+
+                        {% for field in form %}
+                            <div class="md-3" >
+                                    <label class="form-label" for="{{ field.auto_id }}"></label>
+                                    {{ field }}
+                                {% if field.errors|length > 0 %}
+                                    <div class="text-danger">
+                                        {{ field.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-success" type="submit"> Create Todos </button>
+                        </div>
+                    </form>
+                </div>
+             <div class="row">
+                 <div class="col-12">
+                     <h1>Todos</h1>
+                 </div>
+
+                    {% if todos|length > 0 %}
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">Name</th>
+                              <th scope="col">Description</th>
+                              <th scope="col">Due_date</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                           {% for todo in todos %}
+
+                                    <tr>
+                                      <td>{{ todo }}</td>
+                                      <td>{{ todo_details }}</td>
+                                      <td>{{ delete_todo_page }}</td>
+                                      <td>
+                                           <a href="{% url 'delete_todo_page' pk=todo.id %}" class="delete-link">
+                                               <button class="btn btn-danger">Delete</button>
+                                           </a>
+                                          <a href="{% url 'add_to_basket' pk=todo.id %}" class="delete-link">
+                                               <button class="btn btn-danger">Add item</button>
+                                           </a>
+                                      </td>
+                                    </tr>
+                            {% endfor %}
+
+
+                          </tbody>
+                        </table>
+                    {% else %}
+                        <div class="col-12">
+                            <p style="text-align: center;">Alas, No Magical Todos Found </p>
+                        </div>
+
+                    {% endif %}
+            </div>
+        </div>
+{% endblock %}
+

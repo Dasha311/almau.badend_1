@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>Article</title>
+    </head>
+    <body>
+        <h1>My Article</h1>
+        <ol>
+        {% for article in article %}
+            <li>{{ article.title }}</li>
+        {% endfor %}
+        </ol>
+    </body>
+
+
+</html>

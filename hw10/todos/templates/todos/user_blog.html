@@ -1,0 +1,20 @@
+<html>
+<head>
+
+</head>
+<body>
+<h1>{{ profile.user.username }}'s Blog</h1>
+<p>{{ profile.bio }}</p>
+
+{% for post in posts %}
+<div class="post">
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.content }}</p>
+    <p>Published on: {{ post.published_date }}</p>
+</div>
+{% empty %}
+<p>This user has no posts yet.</p>
+{% endfor %}
+
+</body>
+</html>
