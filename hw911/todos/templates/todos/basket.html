@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Todos</title>
+<title>Basket</title>
 {% endblock %}
-
 
 {% block content %}
 <div class="container-fluid">
@@ -18,39 +17,36 @@
         <div class="col-12">
             <table class="table mt-4">
                 <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Due_date </th>
-                    <th scope="col">Actions</th>
-                </tr>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Actions</th>
+                    </tr>
                 </thead>
                 <tbody>
-                {% if orders|length > 0 %}
-                {% for items in items %}
-                <tr>
-                    <td>{{ forloop.counter }}</td>
-                    <td>{{ items.todo.id }}</td>
-                    <td>{{ items.todo }}</td>
-                    <td>{{ items.todo_details }}</td>
-                    <td>{{ items.todo.Due_date }}</td>
-                    <td>{{ items.delete_todo_page }}</td>
-                    <td>
-                        <a href="{% url 'delete_from_basket' pk=order.id %}" class="d-block mt-4">
-                            <button class="btn btn-danger">Delete</button>
-                        </a>
-                    </td>
-                </tr>
-                {% endfor %}
-                {% else %}
-                <tr>
-                    <td colspan="6" class="text-center">
-                        No todo yet
-                    </td>
-                </tr>
-                {% endif %}
+                    {% if basket_items %}
+                        {% for item in basket_items %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ item.todo.id }}</td>
+                                <td>{{ item.todo.title }}</td>
+                                <td>{{ item.todo.description }}</td>
+                                <td>{{ item.amount }}</td>
+                                <td>
+                                    <a href="{% url 'delete_from_basket' pk=item.id %}" class="d-block mt-4">
+                                        <button class="btn btn-danger">Delete</button>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="6" class="text-center">No items in the basket</td>
+                        </tr>
+                    {% endif %}
                 </tbody>
             </table>
         </div>

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Todo
+from .models import Todo, BasketItem
 from .forms import CreateTodoForm
 from django.contrib import messages
 
@@ -45,7 +45,7 @@ def delete_todo_page_view(request, pk):
     try:
         todo = Todo.objects.get(id=pk)
         todo.delete()
-        return redirect('/todos')    
+        return redirect('/todos')
     except Todo.DoesNotExist:
         #return redirect('/todos')
         error = 'Todo not Found'
@@ -53,27 +53,27 @@ def delete_todo_page_view(request, pk):
         return redirect('/todos')
 
 
-def basket_page_view(request,):
+def basket_page_view(request):
     if request.user.is_authenticated:
         if request.method == 'GET':
-            items = Todo.objects.filter(owner_id=request.user.id)
-            return render(request, 'todos/basket.html', {'items': items})
+            basket_items = BasketItem.objects.filter(owner=request.user)
+            return render(request, 'todos/basket.html', {'basket_items': basket_items})
     else:
         return redirect('/auth/login')
 
 def add_todo_to_basket_view(request, pk):
     if request.user.is_authenticated:
-        basket_item = BasketItem(todo_id=pk, owner_id=request.user.id, amount=1)
+        todo = Todo.objects.get(pk=pk)
+        basket_item = BasketItem(todo=todo, owner=request.user)
         basket_item.save()
         return redirect('/basket/')
     else:
         return redirect('/auth/login/')
 
-
 def delete_from_basket_view(request, pk):
-    order = BasketItem.objects.get(id=pk)
-    if request.user.is_authenticated and request.user.id == order.owner.id:
-        order.delete()
+    basket_item = BasketItem.objects.get(pk=pk)
+    if request.user.is_authenticated and request.user == basket_item.owner:
+        basket_item.delete()
         return redirect('/basket/')
     else:
         return redirect('/')

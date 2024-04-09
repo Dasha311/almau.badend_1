@@ -6,7 +6,6 @@ class Todo(models.Model):
     description = models.CharField(null=False, max_length=2000, default='')
     due_date = models.DateField(null=False, max_length=255, default='')
     status = models.BooleanField(null=False, default=0)
-    #category = models.ForeignKey(Category, null=True, on_delete=models.CASCADE)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     class Meta:
@@ -26,4 +25,4 @@ class BasketItem(models.Model):
         verbose_name_plural = 'Basket Items'
 
     def __str__(self):
-        return f'ID: {self.id} {self.owner} {self.todo.name} {self.amount}'
+        return f'ID: {self.id} {self.owner} {self.todo.title} {self.amount}'
