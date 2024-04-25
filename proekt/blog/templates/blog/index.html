@@ -1,0 +1,13 @@
+<html>
+<head>
+    <title>Index page</title>
+</head>
+<body>
+    <h1>Main page</h1>
+    <ol>
+    {% for movie in movies %}
+        <li>{{ movie.name }} -- {{ movie.price }} KZT</li>
+    {% endfor %}
+    </ol>
+</body>
+</html>

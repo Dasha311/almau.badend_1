@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+  <title>Registration</title>
+  <style>
+    .registration-row {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #000;
+        color: #ff0000;
+    }
+    .registration-form {
+        background-color: #ff0000;
+        padding: 20px;
+        border-radius: 10px;
+    }
+    .registration-form h2 {
+        color: #fff;
+    }
+    .registration-form .field-wrapper {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .registration-form .btn-primary {
+        background-color: #000;
+        border-color: #000;
+    }
+    .registration-form .btn-primary:hover {
+        background-color: #ff0000;
+        border-color: #ff0000;
+        color: #fff;
+    }
+    .registration-form a {
+        color: #fff;
+    }
+    .registration-form a:hover {
+        color: #ff0000;
+    }
+  </style>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 registration-row">
+            <div class="col-md-6 mx-auto registration-form">
+                <form name="registration" method="POST">
+                    <h2>Registration</h2>
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="field-wrapper">
+                            {{ field.label_tag }}
+                            {{ field }}
+                            <div class="text-danger">
+                                {{ field.errors }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <button class="btn btn-lg btn-primary btn-block col-12" type="submit">Register</button>
+                </form>
+            <a href="/auth/login/" class="block">Already signed? Login</a>
+            </div>
+        </div>
+    </div>
+  </div>
+{% endblock %}

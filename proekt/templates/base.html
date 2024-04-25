@@ -1,0 +1,25 @@
+{% load static %}
+<html>
+    <head>
+        {% block head %}
+        <title>Movie</title>
+        <style>
+            body {
+                background-color: #000;
+                color: #fff;
+            }
+            a {
+                color: #fff;
+            }
+        </style>
+        {% endblock %}
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <script src="{% static '/js/bootstrap.bundle.min.js' %}"></script>
+        <a href="{% url 'movies_page' %}">Movies</a>
+    </head>
+    <body>
+        {% block content %}
+        {% endblock %}
+        <script src="{% static '/js/bootstrap.min.js' %}"></script>
+    </body>
+</html>

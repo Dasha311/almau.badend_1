@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block head %}
+  <title>Login</title>
+  <style>
+    .login-row {
+        min-height: 80vh;
+        padding: 100px 0;
+        background-color: #000;
+        color: #ff0000;
+    }
+    .login-form {
+        background-color: #ff0000;
+        padding: 20px;
+        border-radius: 10px;
+    }
+    .login-form h2 {
+        color: #fff;
+    }
+    .login-form .field-wrapper {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .login-form .btn-primary {
+        background-color: #000;
+        border-color: #000;
+    }
+    .login-form .btn-primary:hover {
+        background-color: #ff0000;
+        border-color: #ff0000;
+        color: #fff;
+    }
+    .login-form a {
+        color: #fff;
+    }
+    .login-form a:hover {
+        color: #ff0000;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 login-row">
+            <div class="col-md-6 mx-auto login-form">
+                <form name="login" method="POST" novalidate>
+                    <h2>Login</h2>
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <div class="field-wrapper">
+                        {{ field.label_tag }} {{ field }}
+                        <div class="text-danger">
+                            {{ field.errors }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <button class="btn btn-primary d-block col-12 mt-4" type="submit">Login</button>
+                    <a href="/auth/register/" class="d-block text-center mt-4">You dont have an account? Register.</a>
+                    <a href="/auth/forgot-password/" class="d-block text-center mt-4">Forgot your password?</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

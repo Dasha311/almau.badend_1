@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Movies page</title>
+<style>
+    /* Общие стили */
+    body {
+        background-color: black;
+        color: white;
+    }
+
+    /* Стили для контейнера */
+    .container {
+        background-color: #111;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+    }
+
+    /* Стили для таблицы */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 10px;
+        border-bottom: 1px solid #333;
+    }
+
+    th {
+        background-color: #222;
+        color: white;
+    }
+
+    /* Стили для кнопок */
+    .btn {
+        background-color: #ff0000;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        background-color: #ff3333;
+    }
+
+    /* Стили для ссылок */
+    a {
+        color: #ff0000;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    /* Стили для сообщения о пустом списке фильмов */
+    .empty-movies-message {
+        color: #ccc;
+        text-align: center;
+        font-style: italic;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            {% include 'header.html' %}
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-8 offset-2">
+            <h1 class="mt-4">Movie page</h1>
+            {% for msg in messages %}
+            <p class="error-message">{{ msg }}</p>
+            <p style="color: red;">{{ msg }}</p>
+            {% endfor %}
+            <form action="{% url 'index_page' %}" method="POST" class="my-2" autocomplete="off">
+                {% csrf_token %}
+                {% if form.errors %}
+                <div class="alert alert-danger" role="alert">
+                    Please correct the errors below.
+                </div>
+                {% endif %}
+                {% for field in form %}
+                <div class="mb-3">
+                    {{ field }}
+                    {% if field.errors %}
+                    <div class="text-danger">
+                        {{ field.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Create Movie</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <table class="table mt-4">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if movies %}
+                {% for movie in movies %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ movie.id }}</td>
+                    <td>{{ movie.title }}</td>
+                    <td>
+                         <a href="{% url 'movie_details_page' pk=movie.id %}">
+                            <button class="btn btn-primary">Details</button>
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center">
+                        No movies yet
+                    </td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

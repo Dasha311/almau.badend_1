@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block head %}
+    <title>{{ movie.title }}</title>
+{% endblock %}
+{% block content %}
+{% include 'header.html' %}
+<h1>Movie details</h1>
+<h5>Title: {{ movie.title }}</h5>
+<h5>Producer: {{ movie.producer }}</h5>
+<h5>Duration: {{ movie.duration }} minutes</h5>
+<p>Description: {{ movie.description }}</p>
+{% include 'footer.html' %}
+{% endblock %}

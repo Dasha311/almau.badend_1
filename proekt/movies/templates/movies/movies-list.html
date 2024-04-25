@@ -1,0 +1,41 @@
+<table class="table mt-4">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">ID</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Producer</th>
+        <th scope="col">Duration</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% if movies|length > 0 %}
+    {% for movie in movies %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ movie.id }}</td>
+        <td>{{ movie.title }}</td>
+        <td>{{ movie.description }}</td>
+        <td>{{ movie.producer }}</td>
+        <td>{{ movie.duration }}</td>
+        <td>
+            <a href="{% url 'edit_movie_page' pk=movie.id %}">
+                <button class="btn btn-primary">Edit</button>
+            </a>
+            <a href="{% url 'delete_movie_page' pk=movie.id %}">
+                <button class="btn btn-danger">Delete</button>
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+    {% else %}
+    <tr>
+        <td colspan="8" class="text-center">
+            No movies yet
+        </td>
+    </tr>
+    {% endif %}
+    </tbody>
+</table>

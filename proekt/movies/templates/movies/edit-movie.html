@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>{{ movie.title }}</title>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            {% include 'header.html' %}
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-8 offset-2">
+            <h1 class="mt-4">Edit {{ movie.title }}</h1>
+            {% for message in messages %}
+            <p style="color: #5b0c8d;">{{ message }}</p>
+            {% endfor %}
+            <form action="{% url 'edit_movie_page' pk=movie.id %}" method="POST" class="my-2" autocomplete="off">
+                {% csrf_token %}
+                {{ form.errors }}
+                {% include 'movies/movie-fields.html' %}
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Edit Movie</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

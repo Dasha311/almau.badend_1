@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Cart</title>
+<style>
+    /* Общие стили */
+    body {
+        background-color: black;
+        color: white;
+    }
+
+    /* Стили для контейнера */
+    .container {
+        background-color: #111;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+    }
+
+    /* Стили для таблицы */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 10px;
+        border-bottom: 1px solid #333;
+    }
+
+    th {
+        background-color: #222;
+        color: white;
+    }
+
+    /* Стили для кнопок */
+    .btn {
+        background-color: #ff0000;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        background-color: #ff3333;
+    }
+
+    /* Стили для ссылок */
+    a {
+        color: #ff0000;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    /* Стили для сообщения о пустой корзине */
+    .empty-cart-message {
+        color: #ccc;
+        text-align: center;
+        font-style: italic;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            {% include 'header.html' %}
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table class="table mt-4">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if cart_items %}
+                        {% for item in cart_items %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ item.movie.id }}</td>
+                                <td>{{ item.movie.title }}</td>
+                                <td>{{ item.movie.description }}</td>
+                                <td>{{ item.amount }}</td>
+                                <td>
+                                   <a href="{% url 'delete_from_cart' pk=item.id %}" class="d-block mt-4">
+                                         <button class="btn btn-danger">Delete</button>
+                                    </a>
+
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="6" class="text-center">No items in the cart</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
