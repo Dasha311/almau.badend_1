@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="row">
+        <div class="col-8 offset-2">
+            <h1 class="mt-4">Edit {{ doctor.specialty }}</h1>
+            {% for message in messages %}
+                <p style="color: #5b0c8d;">{{ message }}</p>
+            {% endfor %}
+            <form action="{% url 'edit_doctor_page' pk=doctor.id %}" method="POST" class="my-2" autocomplete="off">
+                {% csrf_token %}
+                {{ form.errors }}
+                {% include 'doctors/doctor-fields.html' %}
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Edit Doctor</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

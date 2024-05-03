@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row">
+        <div class="col-8 offset-2">
+            <h1 class="mt-4">Doctors</h1>
+            {% for message in messages %}
+                <p style="color: #5815a7;">{{ message }}</p>
+            {% endfor %}
+        </div>
+        <div class="col-12">
+            <form action="{% url 'index_page' %}" method="POST" class="my-2" autocomplete="off">
+                {% csrf_token %}
+                {{ form.errors }}
+                {% for field in form %}
+                <div class="mb-3">
+                    {{ field }}
+                    <div class="text-danger">
+                        {{ field.errors }}
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Create Doctor</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            {% include 'doctors/doctor-list.html' %}
+        </div>
+    </div>
+</div>

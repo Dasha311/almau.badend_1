@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block head %}
+    <title>{{ doctor.specialty }}</title>
+{% endblock %}
+{% block content %}
+    {% include 'header.html' %}
+    <h1>Doctor details</h1>
+    <h5>Specialty: {{ doctor.specialty }}</h5>
+    <h5>Experience Years: {{ doctor.experience_years }}</h5>
+    <p>Bio: {{ doctor.bio }}</p>
+    {% include 'footer.html' %}
+{% endblock %}

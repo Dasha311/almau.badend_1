@@ -1,0 +1,70 @@
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-8 offset-2">
+            <h1 class="mt-4">Doctor Page</h1>
+            {% for msg in messages %}
+                <p class="error-message">{{ msg }}</p>
+            {% endfor %}
+            <form action="{% url 'index_page' %}" method="POST" class="my-2" autocomplete="off">
+                {% csrf_token %}
+                {% if form.errors %}
+                <div class="alert alert-danger" role="alert">
+                    Please correct the errors below.
+                </div>
+                {% endif %}
+                {% for field in form %}
+                <div class="mb-3">
+                    {{ field }}
+                    {% if field.errors %}
+                    <div class="text-danger">
+                        {{ field.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Create Doctor</button>
+                </div>
+            </form>
+                    </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <table class="table mt-4">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Specialty</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if doctors %}
+                        {% for doctor in doctors %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ doctor.id }}</td>
+                                <td>{{ doctor.specialty }}</td>
+                                <td>
+                                    <a href="{% url 'doctor_details_page' pk=doctor.id %}">
+                                        <button class="btn btn-primary">Details</button>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="text-center">
+                                No doctors yet
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

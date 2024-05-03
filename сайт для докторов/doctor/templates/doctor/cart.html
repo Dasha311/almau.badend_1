@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table class="table mt-4">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Specialty</th>
+                        <th scope="col">Experience Years</th>
+                        <th scope="col">Bio</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if cart_items %}
+                        {% for item in cart_items %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ item.doctor.id }}</td>
+                                <td>{{ item.doctor.specialty }}</td>
+                                <td>{{ item.doctor.experience_years }}</td>
+                                <td>{{ item.doctor.bio }}</td>
+                                <td>
+                                   <a href="{% url 'delete_from_cart' pk=item.id %}" class="d-block mt-4">
+                                         <button class="btn btn-danger">Delete</button>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="6" class="text-center">No items in the cart</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
